@@ -1,0 +1,148 @@
+/* Create the database */
+CREATE DATABASE  IF NOT EXISTS studentassignment;
+
+/* Switch to the praveenassignment database */
+USE studentassignment;
+
+
+CREATE TABLE STUDENT (
+  StdID int(5) PRIMARY KEY,
+  StdName VARCHAR(30) NOT NULL,
+  Sex VARCHAR(6) Not null,
+  Percentage DECIMAL(8,5),
+  SClass int,
+  Sec VARCHAR(1),
+  Stream VARCHAR(10),
+  DOB DATE
+);
+
+INSERT INTO STUDENT (StdID, StdName, Sex, Percentage, SClass, Sec, DOB) VALUES
+  (1001, 'AKSHRA AGARWAL', 2, 70, 11, 1, '1996-11-10'),
+  (1002, 'ANJANI SHARMA', 2, 75, 11, 1, '1996-09-18'),
+  (1003, 'ANSHUL SAXENA', 1, 78, 11, 1, '1996-11-19'),
+  (1004, 'AISHWARYA SINGH', 2, 79, 11, 1, '1996-11-01'),
+  (1005, 'AKRITI SAXENA', 2, 76, 11, 1, '1996-09-20'),
+  (1006, 'KHUSHI AGARWAL', 2, 77, 11, 1, '2003-09-14'),
+  (1007, 'MAAHI AGARWAL', 2, 74, 11, 1, '1997-04-21'),
+  (1008, 'MITALI GUPTA', 2, 78, 12, 1, '1997-11-26'),
+  (1009, 'NIKUNJ AGARWAL', 1, 58, 12, 1, '1997-07-12'),
+  (1010, 'PARKHI', 2, 59, 12, 1, '1997-12-20'),
+  (1011, 'PRAKHAR TIWARI', 1, 43, 12, 1, '1997-04-22'),
+  (1012, 'RAGHAV GANGWAR', 1, 58, 12, 1, '1997-12-21'),
+  (1013, 'SAHIL SARASWAT', 1, 57, 12, 1, '1997-08-13'),
+  (1014, 'SWATI MISHRA', 2, 98, 11, 1, '1996-08-13'),
+  (1015, 'HARSH AGARWAL', 1, 58, 11, 2, '2003-08-28'),
+  (1016, 'HARSHIT KUMAR', 1, 98, 11, 2, '2003-05-22'),
+  (1017, 'JAHANVI KAPOOR', 1, 65, 11, 2, '1997-01-10'),
+  (1018, 'STUTI MISHRA', 1, 66, 11, 3, '1996-01-10'),
+  (1019, 'SURYANSH KUMAR AGARWAL', 1, 85, 11, 3, '2007-08-22'),
+  (1020, 'TANI RASTOGI', 2, 75, 12, 3, '1998-01-15'),
+  (1021, 'TANISHK GUPTA', 1, 55, 12, 3, '1998-04-11'),
+  (1022, 'TANMAY AGARWAL', 1, 57, 11, 3, '1998-06-28'),
+  (1023, 'YASH SAXENA', 1, 79, 11, 3, '1998-03-13'),
+  (1024, 'YESH DUBEY', 1, 85, 12, 3, '1998-04-03');
+  
+  select * from student
+  
+  SELECT StdName, DOB FROM student ;
+  
+  SELECT * FROM student WHERE percentage >= 80;
+  
+  SELECT StdName, Stream, Percentage from student WHERE percentage > 80;
+  
+  SELECT * From student WHERE stream = 'Science' AND percentage > 75;
+  
+  DESCRIBE Student;
+  
+  ALTER TABLE Student ADD TeacherID VARCHAR(20);
+  
+DESC Student;
+
+SELECT * FROM student;
+
+ALTER TABLE Student MODIFY TeacherID INTEGER ;
+DESC Student;
+SELECT * FROM student;
+
+ALTER TABLE Student 
+DROP TeacherID;
+
+SELECT stdname, percentage - 5 FROM Student;
+
+SELECT StdName AS "Student Name",
+DOB As "Date of Birth" FROM Student;
+
+SELECT StdName FROM student
+WHERE Stream <>'Science';
+
+SELECT StdName, percentage FROM student WHERE percentage >=60 AND
+percentage<=80 ;
+
+UPDATE Student SET StdName = 'SWATI VERMA', percentage = 86
+WHERE StdId = 1014;
+
+DELETE FROM Student WHERE StdID = 1016;
+
+SELECT * FROM Student WHERE StdName LIKE 'G_' ;
+SELECT * FROM Student WHERE StdName='G';
+SELECT * from Student WHERE StdName='%G%' ;
+
+SELECT DISTINCT Stream FROM Student;
+
+SELECT StdName, Sex, Stream FROM Student WHERE percentage BETWEEN 70 AND 80;
+
+CREATE TABLE EMP (
+  EMPNO INT,
+  ENAME VARCHAR(255),
+  JOB VARCHAR(255),
+  MGR INT,
+  HIREDATE DATE,
+  SAL DECIMAL(10, 2),
+  COMM DECIMAL(10, 2),
+  DEPTNO INT
+);
+
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+VALUES
+  (8369, 'SMITH', 'CLERK', 8902, '1990-12-18', 800.00, NULL, 20),
+  (8499, 'ANYA', 'SALESMAN', 8698, '1991-02-20', 1600.00, 300.00, 30),
+  (8521, 'SETH', 'SALESMAN', 8698, '1991-02-22', 1250.00, 500.00, 30),
+  (8566, 'MAHADEVAN', 'MANAGER', 8839, '1991-04-02', 2985.00, NULL, 20),
+  (8654, 'MOMIN', 'SALESMAN', 8698, '1991-09-28', 1250.00, 1400.00, 30),
+  (8698, 'BINA', 'MANAGER', 8839, '1991-05-01', 2850.00, NULL, 30),
+  (8882, 'SHIVANSH', 'MANAGER', 8839, '1991-06-09', 2450.00, NULL, 10),
+  (8888, 'SCOTT', 'ANALYST', 8566, '1992-12-09', 3000.00, NULL, 20),
+  (8839, 'AMIR', 'PRESIDENT', NULL, '1991-11-18', 5000.00, NULL, 10),
+  (8844, 'KULDEEP', 'SALESMAN', 8698, '1991-09-08', 1500.00, 0.00, 30);
+
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL >= 2200;
+
+SELECT *
+FROM EMP
+WHERE COMM IS NULL;
+
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL < 2500 OR SAL > 4000;
+  
+SELECT ENAME, JOB, SAL
+FROM EMP
+WHERE MGR IS NULL;
+
+SELECT ENAME
+FROM EMP
+WHERE SUBSTR(ENAME, 3, 1) = 'A';
+
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE '%T';
+
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE 'M_L%';
+
+SELECT   EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COALESCE(COMM, 'Not given') AS COMM, DEPTNO
+FROM EMP
+WHERE COMM IS NULL;
