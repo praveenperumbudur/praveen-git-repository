@@ -1,0 +1,449 @@
+ use mongo_practice
+switched to db mongo_practice
+mongo_practice> show collections
+
+mongo_practice> use mongo_practice
+already on db mongo_practice
+mongo_practice> show collections
+movies
+mongo_practice> db.movies.insertMany([
+...   {
+...     title: "Fight Club",
+mongo_practice>
+...     year: 1999,
+...     actors: ["Brad Pitt", "Edward Norton"]
+...   },
+...   {
+...     title: "Pulp Fiction",
+...     writer: "Quentin Tarantino",
+...     year: 1994,
+...     actors: ["John Travolta", "Uma Thurman"]
+...   },
+...   {
+...     title: "Inglorious Basterds",
+...     writer: "Quentin Tarantino",
+...     year: 2009,
+...     actors: ["Brad Pitt", "Diane Kruger", "Eli Roth"]
+...   },
+...   {
+...     title: "The Hobbit: An Unexpected Journey",
+...     writer: "J.R.R. Tolkein",
+...     year: 2012,
+...     franchise: "The Hobbit"
+...   },
+...   {
+...     title: "The Hobbit: The Desolation of Smaug",
+...     writer: "J.R.R. Tolkein",
+...     year: 2013,
+...     franchise: "The Hobbit"
+...   },
+...   {
+...     title: "The Hobbit: The Battle of the Five Armies",
+...     writer: "J.R.R. Tolkein",
+...     year: 2012,
+...     franchise: "The Hobbit",
+...     synopsis: "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness."
+...   },
+...   {
+...     title: "Pee Wee Herman's Big Adventure"
+...   },
+...   {
+...     title: "Avatar"
+...   }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66b360d8bfda4e8888228fc6'),
+    '1': ObjectId('66b360d8bfda4e8888228fc7'),
+    '2': ObjectId('66b360d8bfda4e8888228fc8'),
+    '3': ObjectId('66b360d8bfda4e8888228fc9'),
+    '4': ObjectId('66b360d8bfda4e8888228fca'),
+    '5': ObjectId('66b360d8bfda4e8888228fcb'),
+    '6': ObjectId('66b360d8bfda4e8888228fcc'),
+    '7': ObjectId('66b360d8bfda4e8888228fcd')
+  }
+}
+mongo_practice> db.movies.find()
+mongo_practice> db.movies.find().pretty()
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc8'),
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc9'),
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fca'),
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fcb'),
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fcc'),
+    title: "Pee Wee Herman's Big Adventure"
+  },
+  { _id: ObjectId('66b360d8bfda4e8888228fcd'), title: 'Avatar' }
+]
+mongo_practice> db.movies.find({ writer: "Quentin Tarantino" })
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc8'),
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  }
+]
+mongo_practice> db.movies.find({ actors: "Brad Pitt" })
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc8'),
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  }
+]
+mongo_practice> db.movies.find({ franchise: "The Hobbit" });
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc9'),
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fca'),
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fcb'),
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  }
+]
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lte: 1999 } });
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  }
+]
+mongo_practice> db.movies.find({ $or: [ { year: { $lt: 2000 } }, { year: { $gt: 2010 } } ] });
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc9'),
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fca'),
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fcb'),
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  }
+]
+mongo_practice> db.movies.find({ title: /^Inglorious/ });
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc8'),
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  }
+]
+mongo_practice> db.movies.find( {}, { title: 1, actors: 1, _id: 0 } // Projection to include only title and actors, exclude _id ).sort({ title: -1 });
+...
+...
+...
+...
+...
+... db.movies.find( {}, { title: 1, actors: 1, _id: 0 })
+Uncaught:
+SyntaxError: Unexpected token, expected "," (7:0)
+
+  5 |
+  6 |
+> 7 | db.movies.find( {}, { title: 1, actors: 1, _id: 0 })
+    | ^
+  8 |
+
+mongo_practice> db.movies.find( {}, { title: 1, actors: 1, _id: 0 })
+[
+  { title: 'Fight Club', actors: [ 'Brad Pitt', 'Edward Norton' ] },
+  { title: 'Pulp Fiction', actors: [ 'John Travolta', 'Uma Thurman' ] },
+  {
+    title: 'Inglorious Basterds',
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  { title: 'The Hobbit: An Unexpected Journey' },
+  { title: 'The Hobbit: The Desolation of Smaug' },
+  { title: 'The Hobbit: The Battle of the Five Armies' },
+  { title: "Pee Wee Herman's Big Adventure" },
+  { title: 'Avatar' }
+]
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lt: 2000 } }).sort({ year: -1 })
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  }
+]
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lt: 2000 } }).sort({ year: -1 }).limit(1)
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  }
+]
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lt: 2000 } }).sort({ year: -1 }).skip(2).limit(1)
+
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lt: 2000 } }).sort({ year: -1 }).skip(2).limit(1)
+
+mongo_practice> db.movies.find().sort({ _id: 1 }).skip(2).limit(1)
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc8'),
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  }
+]
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lt: 2000 } })
+[
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  }
+]
+mongo_practice> use Ustdb
+switched to db Ustdb
+Ustdb> db.emp.updateOne({firstName:"Manas"},{$set : {age:25}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.emp.updateMany({firstName:"Manas"},{$set : {designation:"CTO"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.emp.updateOne({lastName:"Joshi"}, {$set:{salary:15000, email:"parag.joshi@hematitecorp.com",
+... age:42}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.emp.updateMany({lastName:"Joshi"},{$set : {salary:10000}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.emp.updateMany({married:true},{$inc : {salary:1000}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.emp.updateMany({},{$currentDate:{updatedDate:true}},false)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.emp.updateOne({firstName:"Parag"},{$unset: {email:""}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.inventory.updateOne(
+... {item:"journal"},{$set:{"tags":["blue","red"]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Ustdb> db.inventory.deleteOne({item:"journal"})
+{ acknowledged: true, deletedCount: 0 }
+Ustdb> db.inventory.deleteMany({})
+{ acknowledged: true, deletedCount: 0 }
+mongo_practice> db.movies.find({ year: { $gte: 1990, $lt: 2020 } }).sort({ year: -1 })
+[witched to db mongo_practice
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fca'),
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc9'),
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fcb'),
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc8'),
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc6'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('66b360d8bfda4e8888228fc7'),
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  }
+]
